@@ -13,9 +13,9 @@ class MainViewController: UIViewController {
       loadResults,
       pushDetailView
     ) = mainViewModel(
-      cellTapped: Empty().eraseToAnyPublisher(), // pass cell tap event into viewmodel
+      cellTapped: <#Pass cell tap event here#>, // to compile but not function, you can replace with Empty().eraseToAnyPublisher()
       searchText: searchTextChangedSubject.eraseToAnyPublisher(),
-      viewWillAppear: Empty().eraseToAnyPublisher() // pass will appear event into viewmodel
+      viewWillAppear: <#Pass will appear event here#> // to compile but not function, you can replace with Empty().eraseToAnyPublisher()
     )
 
     loadResults
