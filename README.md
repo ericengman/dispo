@@ -8,7 +8,9 @@ Tapping on a cell should push the `DetailViewController`. When the `DetailViewCo
 
 As much as possible, stick to the Combine ViewModel structure implemented in the `MainViewController`. The `DetailViewController` should use a similar system for loading additional information from the API.
 
-You cannot use any additional dependencies.
+You shouldn't need to use any additional dependencies.
+
+And while not required, feel free to add additional flourishes or features!
 
 ## Setup
 
