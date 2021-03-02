@@ -3,7 +3,7 @@ import UIKit
 
 struct TenorAPIClient {
   var gifInfo: (_ gifId: String) -> AnyPublisher<GifInfo, Never>
-  var searchGIFs: (String) -> AnyPublisher<[SearchResult], Never>
+  var searchGIFs: (_ query: String) -> AnyPublisher<[SearchResult], Never>
   var featuredGIFs: () -> AnyPublisher<[SearchResult], Never>
 }
 
@@ -35,7 +35,7 @@ extension TenorAPIClient {
           }
           return element.data
         }
-        .decode(type: APIResponse.self, decoder: JSONDecoder())
+        .decode(type: APIListResponse.self, decoder: JSONDecoder())
         .map { response in
           response.results.map {
             SearchResult(
@@ -69,7 +69,7 @@ extension TenorAPIClient {
           }
           return element.data
         }
-        .decode(type: APIResponse.self, decoder: JSONDecoder())
+        .decode(type: APIListResponse.self, decoder: JSONDecoder())
         .map { response in
           response.results.map {
             SearchResult(
@@ -87,7 +87,7 @@ extension TenorAPIClient {
   )
 }
 
-private struct APIResponse: Codable {
+private struct APIListResponse: Codable {
   var results: [Result]
 
   struct Result: Codable {

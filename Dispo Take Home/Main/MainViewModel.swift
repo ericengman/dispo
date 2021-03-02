@@ -11,26 +11,18 @@ func mainViewModel(
 ) {
   let api = TenorAPIClient.live
 
-  let featuredGifs = viewWillAppear
-    .first()
-    .flatMap { api.featuredGIFs() }
+  let featuredGifs = Empty<[SearchResult], Never>()
 
   let searchResults = searchText
     .map { api.searchGIFs($0) }
     .switchToLatest()
 
-  let loadResults = Publishers
-    .CombineLatest3(
-      searchText.prepend(""),
-      searchResults,
-      featuredGifs
-    )
-    .map { query, searchResults, featured in
-      query.isEmpty ? featured : searchResults
-    }
+  // show featured gifs when there is no search query, otherwise show search results
+  let loadResults = searchResults
     .eraseToAnyPublisher()
 
-  let pushDetailView = cellTapped
+  let pushDetailView = Empty<SearchResult, Never>()
+    .eraseToAnyPublisher()
 
   return (
     loadResults: loadResults,

@@ -2,5 +2,5 @@ enum Constants {}
 
 extension Constants {
   // Get an API key from https://tenor.com/developer/keyregistration
-  static let tenorApiKey = "92JSKWN1OEN0"
+  static let tenorApiKey = ""
 }

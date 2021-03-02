@@ -2,12 +2,8 @@ import Combine
 import UIKit
 
 class MainViewController: UIViewController {
-  private var results: [SearchResult] = []
-
   private var cancellables = Set<AnyCancellable>()
-  private let cellTappedSubject = PassthroughSubject<SearchResult, Never>()
   private let searchTextChangedSubject = PassthroughSubject<String, Never>()
-  private let viewWillAppearSubject = PassthroughSubject<Void, Never>()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -17,31 +13,22 @@ class MainViewController: UIViewController {
       loadResults,
       pushDetailView
     ) = mainViewModel(
-      cellTapped: cellTappedSubject.eraseToAnyPublisher(),
+      cellTapped: Empty().eraseToAnyPublisher(), // pass cell tap event into viewmodel
       searchText: searchTextChangedSubject.eraseToAnyPublisher(),
-      viewWillAppear: viewWillAppearSubject.eraseToAnyPublisher()
+      viewWillAppear: Empty().eraseToAnyPublisher() // pass will appear event into viewmodel
     )
 
     loadResults
       .sink { [weak self] results in
-        self?.results = results
-        self?.collectionView.reloadData()
+        // load search results into data source
       }
       .store(in: &cancellables)
 
     pushDetailView
       .sink { [weak self] result in
-        self?.navigationController?.pushViewController(
-          DetailViewController(searchResult: result),
-          animated: true
-        )
+        // push detail view
       }
       .store(in: &cancellables)
-  }
-
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    viewWillAppearSubject.send()
   }
 
   override func loadView() {
@@ -61,29 +48,18 @@ class MainViewController: UIViewController {
     return searchBar
   }()
 
+  private var layout: UICollectionViewLayout {
+    // TODO: implement
+    fatalError()
+  }
+
   private lazy var collectionView: UICollectionView = {
     let collectionView = UICollectionView(
       frame: .zero,
-      collectionViewLayout: UICollectionViewCompositionalLayout(sectionProvider: { _, _ in
-        let item = NSCollectionLayoutItem(layoutSize: .init(
-          widthDimension: .fractionalWidth(1),
-          heightDimension: .estimated(80)
-        ))
-        let group = NSCollectionLayoutGroup.vertical(
-          layoutSize: .init(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(80)
-          ),
-          subitems: [item]
-        )
-        return NSCollectionLayoutSection(group: group)
-      })
+      collectionViewLayout: layout
     )
     collectionView.backgroundColor = .clear
     collectionView.keyboardDismissMode = .onDrag
-    collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: "cell")
-    collectionView.dataSource = self
-    collectionView.delegate = self
     return collectionView
   }()
 }
@@ -93,36 +69,5 @@ class MainViewController: UIViewController {
 extension MainViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     searchTextChangedSubject.send(searchText)
-  }
-}
-
-// MARK: UICollectionViewDataSource
-
-extension MainViewController: UICollectionViewDataSource {
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    results.count
-  }
-
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    guard let cell = collectionView.dequeueReusableCell(
-      withReuseIdentifier: "cell",
-      for: indexPath
-    ) as? SearchResultCell else {
-      fatalError()
-    }
-    let result = results[indexPath.item]
-    cell.configure(searchResult: result)
-    return cell
-  }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension MainViewController: UICollectionViewDelegate {
-  func collectionView(
-    _ collectionView: UICollectionView,
-    didSelectItemAt indexPath: IndexPath
-  ) {
-    cellTappedSubject.send(results[indexPath.item])
   }
 }

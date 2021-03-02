@@ -16,12 +16,11 @@
 		FF9415CF25EED15B0029E28F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = FF9415CE25EED15B0029E28F /* SnapKit */; };
 		FF9415D225EED25A0029E28F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415D125EED2590029E28F /* DetailViewController.swift */; };
 		FF9415D525EED60B0029E28F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415D425EED60B0029E28F /* Constants.swift */; };
-		FF9415D825EEDA810029E28F /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415D725EEDA810029E28F /* SearchResultCell.swift */; };
 		FF9415DB25EEDBB50029E28F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415DA25EEDBB50029E28F /* MainViewModel.swift */; };
 		FF9415DF25EEDC000029E28F /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FF9415DE25EEDC000029E28F /* KingfisherSwiftUI */; };
 		FF9415E225EEDC3A0029E28F /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415E125EEDC3A0029E28F /* SearchResult.swift */; };
 		FF9415E625EEDF380029E28F /* TenorAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415E525EEDF380029E28F /* TenorAPIClient.swift */; };
-		FF9415F025EEEF100029E28F /* GifInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415EF25EEEF100029E28F /* GifInfo.swift */; };
+		FF9415F625EEF5760029E28F /* GifInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415F525EEF5760029E28F /* GifInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,11 +34,10 @@
 		FF9415CA25EED1360029E28F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FF9415D125EED2590029E28F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FF9415D425EED60B0029E28F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		FF9415D725EEDA810029E28F /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		FF9415DA25EEDBB50029E28F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FF9415E125EEDC3A0029E28F /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		FF9415E525EEDF380029E28F /* TenorAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenorAPIClient.swift; sourceTree = "<group>"; };
-		FF9415EF25EEEF100029E28F /* GifInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifInfo.swift; sourceTree = "<group>"; };
+		FF9415F525EEF5760029E28F /* GifInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +98,6 @@
 			children = (
 				FF9415CA25EED1360029E28F /* MainViewController.swift */,
 				FF9415DA25EEDBB50029E28F /* MainViewModel.swift */,
-				FF9415D725EEDA810029E28F /* SearchResultCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -117,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				FF9415D425EED60B0029E28F /* Constants.swift */,
-				FF9415EF25EEEF100029E28F /* GifInfo.swift */,
+				FF9415F525EEF5760029E28F /* GifInfo.swift */,
 				FF9415E125EEDC3A0029E28F /* SearchResult.swift */,
 				FF9415E525EEDF380029E28F /* TenorAPIClient.swift */,
 			);
@@ -202,15 +199,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF9415F625EEF5760029E28F /* GifInfo.swift in Sources */,
 				FF9415E625EEDF380029E28F /* TenorAPIClient.swift in Sources */,
 				FF9415DB25EEDBB50029E28F /* MainViewModel.swift in Sources */,
-				FF9415F025EEEF100029E28F /* GifInfo.swift in Sources */,
 				FF9415D525EED60B0029E28F /* Constants.swift in Sources */,
 				FF9415E225EEDC3A0029E28F /* SearchResult.swift in Sources */,
 				FF9415CB25EED1360029E28F /* MainViewController.swift in Sources */,
 				FF9415B525EECD340029E28F /* AppDelegate.swift in Sources */,
 				FF9415B725EECD340029E28F /* SceneDelegate.swift in Sources */,
-				FF9415D825EEDA810029E28F /* SearchResultCell.swift in Sources */,
 				FF9415D225EED25A0029E28F /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
