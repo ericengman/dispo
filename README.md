@@ -4,13 +4,13 @@ Create an iOS app with two views, `MainViewController` and `DetailViewController
 
 When there is no query, the view should display the featured gifs. When there is a query, it should display the search results from the API.
 
-Tapping on a cell should push the `DetailViewController`. When the `DetailViewController` loads, it should request more information from the API like share count, tags, and background color, and display it. This data must be requested from `DetailViewController`, not passed from the previous view controller.
+Tapping on a cell should push the `DetailViewController`. When the `DetailViewController` loads, it should request information from the API like title, source tld, and rating, and display it. This data must be requested from `DetailViewController`, not passed from the previous view controller (only pass the gif ID, then request data from the API again).
 
 As much as possible, stick to the Combine ViewModel structure implemented in the `MainViewController`. The `DetailViewController` should use a similar system for loading additional information from the API.
 
 You shouldn't need to use any additional dependencies.
 
-And while not required, feel free to add additional flourishes or features!
+And while not required, feel free to add additional flourishes or features! (For example, opening Safari to the Giphy page for that gif from a button on the detail page, or using modern UIKit APIs)
 
 ## Setup
 
@@ -32,7 +32,7 @@ Get an API key [here](https://tenor.com/developer/keyregistration) and put it in
 
 ## Submission Instructions
 
-Create a private GitHub repository and invite `malonehedges` and `regynald` and respond to the email sent from `m@dispo.fun` when ready.
+Create a private GitHub repository and invite `malonehedges` and `regynald`. Send an email to Chayanne and `m@dispo.fun` with the GitHub repository URL when ready.
 
 ![Main View](assets/main-view.png)
 
