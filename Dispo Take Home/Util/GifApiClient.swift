@@ -1,29 +1,28 @@
 import Combine
 import UIKit
 
-struct TenorAPIClient {
+struct GifAPIClient {
   var gifInfo: (_ gifId: String) -> AnyPublisher<GifInfo, Never>
-  var searchGIFs: (_ query: String) -> AnyPublisher<[SearchResult], Never>
+  var searchGIFs: (String) -> AnyPublisher<[SearchResult], Never>
   var featuredGIFs: () -> AnyPublisher<[SearchResult], Never>
 }
 
 // MARK: - Live Implementation
 
-extension TenorAPIClient {
-  static let live = TenorAPIClient(
+extension GifAPIClient {
+  static let live = GifAPIClient(
     gifInfo: { gifId in
       // TODO: Implement
       Empty().eraseToAnyPublisher()
     },
     searchGIFs: { query in
       var components = URLComponents(
-        url: URL(string: "https://g.tenor.com/v1/search")!,
+        url: URL(string: "https://api.giphy.com/v1/gifs/search")!,
         resolvingAgainstBaseURL: false
       )!
       components.queryItems = [
+        .init(name: "api_key", value: Constants.giphyApiKey),
         .init(name: "q", value: query),
-        .init(name: "key", value: Constants.tenorApiKey),
-        .init(name: "limit", value: "30"),
       ]
       let url = components.url!
 
@@ -37,11 +36,11 @@ extension TenorAPIClient {
         }
         .decode(type: APIListResponse.self, decoder: JSONDecoder())
         .map { response in
-          response.results.map {
+          response.data.map {
             SearchResult(
               id: $0.id,
-              gifUrl: $0.media[0].gif.url,
-              text: $0.h1_title ?? "no title"
+              gifUrl: $0.images.fixed_height.url,
+              title: $0.title
             )
           }
         }
@@ -52,12 +51,12 @@ extension TenorAPIClient {
     },
     featuredGIFs: {
       var components = URLComponents(
-        url: URL(string: "https://g.tenor.com/v1/trending")!,
+        url: URL(string: "https://api.giphy.com/v1/gifs/trending")!,
         resolvingAgainstBaseURL: false
       )!
       components.queryItems = [
-        .init(name: "key", value: Constants.tenorApiKey),
-        .init(name: "limit", value: "30"),
+        .init(name: "api_key", value: Constants.giphyApiKey),
+        .init(name: "rating", value: "pg"),
       ]
       let url = components.url!
 
@@ -71,11 +70,11 @@ extension TenorAPIClient {
         }
         .decode(type: APIListResponse.self, decoder: JSONDecoder())
         .map { response in
-          response.results.map {
+          response.data.map {
             SearchResult(
               id: $0.id,
-              gifUrl: $0.media[0].gif.url,
-              text: $0.h1_title ?? "no title"
+              gifUrl: $0.images.fixed_height.url,
+              title: $0.title
             )
           }
         }
@@ -88,19 +87,25 @@ extension TenorAPIClient {
 }
 
 private struct APIListResponse: Codable {
-  var results: [Result]
+  var data: [GifObject]
+}
 
-  struct Result: Codable {
-    var id: String
-    var h1_title: String?
-    var media: [Media]
+private struct GifObject: Codable {
+  var id: String
+  var title: String
+  var source_tld: String
+  var rating: String
+  /// Giphy URL (not gif url to be displayed)
+  var url: URL
+  var images: Images
 
-    struct Media: Codable {
-      var gif: MediaData
+  struct Images: Codable {
+    var fixed_height: Image
 
-      struct MediaData: Codable {
-        var url: URL
-      }
+    struct Image: Codable {
+      var url: URL
+      var width: String
+      var height: String
     }
   }
 }

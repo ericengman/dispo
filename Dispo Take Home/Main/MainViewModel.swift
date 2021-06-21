@@ -9,16 +9,16 @@ func mainViewModel(
   loadResults: AnyPublisher<[SearchResult], Never>,
   pushDetailView: AnyPublisher<SearchResult, Never>
 ) {
-  let api = TenorAPIClient.live
+  let api = GifAPIClient.live
 
-  let featuredGifs = Empty<[SearchResult], Never>()
+  let trendingGifs = Empty<[SearchResult], Never>()
 
   let searchResults = searchText
     .map { api.searchGIFs($0) }
     .switchToLatest()
 
   // show featured gifs when there is no search query, otherwise show search results
-  let loadResults = searchResults
+  let loadResults = trendingGifs
     .eraseToAnyPublisher()
 
   let pushDetailView = Empty<SearchResult, Never>()

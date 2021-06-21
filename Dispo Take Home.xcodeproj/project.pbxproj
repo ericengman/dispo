@@ -19,7 +19,7 @@
 		FF9415DB25EEDBB50029E28F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415DA25EEDBB50029E28F /* MainViewModel.swift */; };
 		FF9415DF25EEDC000029E28F /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FF9415DE25EEDC000029E28F /* KingfisherSwiftUI */; };
 		FF9415E225EEDC3A0029E28F /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415E125EEDC3A0029E28F /* SearchResult.swift */; };
-		FF9415E625EEDF380029E28F /* TenorAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415E525EEDF380029E28F /* TenorAPIClient.swift */; };
+		FF9415E625EEDF380029E28F /* GifApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415E525EEDF380029E28F /* GifApiClient.swift */; };
 		FF9415F625EEF5760029E28F /* GifInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9415F525EEF5760029E28F /* GifInfo.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +36,7 @@
 		FF9415D425EED60B0029E28F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FF9415DA25EEDBB50029E28F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FF9415E125EEDC3A0029E28F /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
-		FF9415E525EEDF380029E28F /* TenorAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenorAPIClient.swift; sourceTree = "<group>"; };
+		FF9415E525EEDF380029E28F /* GifApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifApiClient.swift; sourceTree = "<group>"; };
 		FF9415F525EEF5760029E28F /* GifInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +116,7 @@
 				FF9415D425EED60B0029E28F /* Constants.swift */,
 				FF9415F525EEF5760029E28F /* GifInfo.swift */,
 				FF9415E125EEDC3A0029E28F /* SearchResult.swift */,
-				FF9415E525EEDF380029E28F /* TenorAPIClient.swift */,
+				FF9415E525EEDF380029E28F /* GifApiClient.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF9415F625EEF5760029E28F /* GifInfo.swift in Sources */,
-				FF9415E625EEDF380029E28F /* TenorAPIClient.swift in Sources */,
+				FF9415E625EEDF380029E28F /* GifApiClient.swift in Sources */,
 				FF9415DB25EEDBB50029E28F /* MainViewModel.swift in Sources */,
 				FF9415D525EED60B0029E28F /* Constants.swift in Sources */,
 				FF9415E225EEDC3A0029E28F /* SearchResult.swift in Sources */,
