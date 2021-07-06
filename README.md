@@ -1,4 +1,4 @@
-# Dispo iOS Take Home
+# iOS Take Home
 
 Create an iOS app with two views, `MainViewController` and `DetailViewController`. The `MainViewController` contains a list of GIFs from the [Giphy API](https://developers.giphy.com/).
 
@@ -32,7 +32,7 @@ Get an API key [here](https://developers.giphy.com/dashboard/) and put it into `
 
 ## Submission Instructions
 
-Create a private GitHub repository and invite `malonehedges` and `regynald`. Send an email to Chayanne and `m@dispo.fun` with the GitHub repository URL when ready.
+Create a public GitHub repository. Share this GitHub URL with your point of contact.
 
 ![Main View](assets/main-view.png)
 
