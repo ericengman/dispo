@@ -1,6 +1,6 @@
 # Dispo iOS Take Home
 
-Create an iOS app with two views, `MainViewController` and `DetailViewController`. The `MainViewController` contains a list of GIFs from the [Tenor API](https://tenor.com/gifapi/documentation).
+Create an iOS app with two views, `MainViewController` and `DetailViewController`. The `MainViewController` contains a list of GIFs from the [Giphy API](https://developers.giphy.com/).
 
 When there is no query, the view should display the featured gifs. When there is a query, it should display the search results from the API.
 
@@ -14,7 +14,7 @@ And while not required, feel free to add additional flourishes or features! (For
 
 ## Setup
 
-Get an API key [here](https://tenor.com/developer/keyregistration) and put it into `Constants.swift`
+Get an API key [here](https://developers.giphy.com/dashboard/) and put it into `Constants.swift`
 
 ## Evaluation
 

@@ -6,6 +6,5 @@ struct GifInfo {
   var text: String
   var shares: Int
   var backgroundColor: UIColor?
-  var tenorUrl: URL
   var tags: [String]
 }

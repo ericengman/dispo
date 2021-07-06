@@ -11,7 +11,7 @@
         }
       },
       {
-        "package": "SnapKit",
+        "package": "snapkit",
         "repositoryURL": "https://github.com/snapkit/snapkit.git",
         "state": {
           "branch": null,
