@@ -37,3 +37,5 @@ Create a private GitHub repository and invite `malonehedges` and `regynald`. Sen
 ![Main View](assets/main-view.png)
 
 ![Detail View](assets/detail-view.png)
+
+Note: The data displayed here is for demonstration purposes. You should display any data possible from the Giphy API that you can on the detail view.
