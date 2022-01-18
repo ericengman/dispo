@@ -8,15 +8,14 @@ class DetailViewController: UIViewController {
     private let gifView: UIImageView = {
         let imgView = UIImageView()
         imgView.contentMode = .scaleAspectFit
-        imgView.layer.masksToBounds = true
-        imgView.layer.cornerRadius = 10
         return imgView
     }()
     
     private let label: UILabel = {
         let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont(name: "Avenir Next", size: 16)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Avenir Next", size: 20)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -30,24 +29,34 @@ class DetailViewController: UIViewController {
             switch result {
             case .failure(let error): print(error.localizedDescription)
             case .success(let data):
-                DispatchQueue.main.async {
-                    self?.gifView.kf.setImage(with: data.data.url)
+                DispatchQueue.main.async { [weak self] in
+                    self?.setLabel(from: data.data)
+                    self?.gifView.kf.setImage(with: data.data.images.downsized_large.url, placeholder: nil)
                 }
             }
         }
     }
     
     override func viewDidLayoutSubviews() {
-        let stack = UIStackView(arrangedSubviews: [gifView, label])
-        stack.axis = .vertical
-        stack.distribution = .fill
-        view.addSubview(stack)
-        stack.snp.makeConstraints { make in
-            make.top.equalTo(view)
-            make.left.equalTo(view)
-            make.right.equalTo(view)
-            make.bottom.equalTo(view)
+        view.addSubview(gifView)
+        view.addSubview(label)
+        gifView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).inset(20)
         }
+        label.snp.makeConstraints { make in
+            make.top.equalTo(gifView.snp_bottomMargin).offset(20)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).inset(20)
+        }
+    }
+    
+    private func setLabel(from data: GifInfo) {
+        gifView.snp.makeConstraints({ make in
+            make.height.equalTo(Int(data.images.downsized_large.height)!)
+        })
+        label.text = "Title: \(data.title)\nSource: \(data.source_tld)\nRating: \(data.rating)"
     }
     
     required init?(coder: NSCoder) {

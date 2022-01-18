@@ -20,7 +20,6 @@ struct GifObject: Codable {
             var url: URL
             var width: String
             var height: String
-            var downloadedImage: UIImage?
             
             private enum CodingKeys: CodingKey {
                 case url, width, height
