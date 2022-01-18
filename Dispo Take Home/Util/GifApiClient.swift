@@ -11,14 +11,13 @@ class GifAPIClient {
     }
     
     func getGifs<T: Codable>(newSession: Bool, url: URL?, type: T.Type, completion: @escaping(Result<T, Error>) -> Void) {
-        if newSession && session != nil { session.cancel(); print("Cancelling current session", session.taskDescription ?? "no description") } // Cancel any current calls
+        if newSession && session != nil { session.cancel() } // Cancel any current calls
         
         guard let url = url else {
             completion(.failure(CustomError.invalidUrl))
             return
         }
-        session = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            self?.session.taskDescription = "\(url.absoluteString)"
+        session = URLSession.shared.dataTask(with: url) { data, _, error in
             guard let data = data else {
                 if let error = error {
                     completion(.failure(error))

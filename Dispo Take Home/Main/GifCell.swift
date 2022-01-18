@@ -54,7 +54,6 @@ final class GifCell: UICollectionViewCell {
     public func setupCell(from object: GifObject?) {
         label.text = object?.title
         imgView.kf.setImage(with: object?.images.fixed_height.url)
-        print(object?.images.fixed_height.url ?? "")
     }
     
     required init?(coder: NSCoder) {

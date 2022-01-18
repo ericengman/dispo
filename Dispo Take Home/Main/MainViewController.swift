@@ -15,14 +15,21 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.titleView = searchBar
-        getTrending()
+        getGifs(Constants.getTrendingURL())
     }
-    
-    func getTrending() {
-        GifManager.getGifs(newSession: true, url: Constants.trendingURL, type: APIListResponse.self) { [weak self] result in
+
+    private func getGifs(_ url: URL?, append: Bool = false) {
+        GifManager.getGifs(newSession: true, url: url, type: APIListResponse.self) { [weak self] result in
             switch result {
-            case .failure(let error):   print(error.localizedDescription)
-            case .success(let data):    self?.objects = data.data
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let data):
+                if append {
+                    self?.objects.append(contentsOf: data.data)
+                }
+                else {
+                    self?.objects = data.data
+                }
             }
         }
     }
@@ -69,16 +76,10 @@ class MainViewController: UIViewController {
 
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // TODO: implement
         if searchText.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            getTrending()
+            getGifs(Constants.getTrendingURL())
         } else {
-            GifManager.getGifs(newSession: true, url: Constants.searchByKeyURL(searchText), type: APIListResponse.self) { [weak self] result in
-                switch result {
-                case .failure(let error):   print(error.localizedDescription)
-                case .success(let data):    self?.objects = data.data
-                }
-            }
+            getGifs(Constants.searchByKeyURL(searchText))
         }
     }
 }
@@ -107,6 +108,22 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 8, bottom: 200, right: 8)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == objects.count - 1 {
+            loadNextTen(at: indexPath)
+        }
+    }
+    
+    func loadNextTen(at index: IndexPath) {
+        if let search = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), search != "" {
+            let offset = index.row
+            getGifs(Constants.searchByKeyURL(search, count: 10, offset: offset), append: true)
+        } else { // Load trending next
+            // Trending does not allow for offset, will only load up to 60
+            getGifs(Constants.getTrendingURL(limit: index.row + 10))
+        }
     }
 }
 

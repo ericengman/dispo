@@ -19,18 +19,18 @@ class DetailViewController: UIViewController {
         return label
     }()
     
-    
     init(searchResult: SearchResult) {
         super.init(nibName: nil, bundle: nil)
         title = "Gif Info Details"
         view.backgroundColor = .systemBackground
-        // Download the image and details from search result
+        // Download the details from the gif id
         GifManager.getGifs(newSession: false, url: Constants.searchByGifURL(searchResult.id), type: APIGifInfoResponse.self) { [weak self] result in
             switch result {
             case .failure(let error): print(error.localizedDescription)
             case .success(let data):
                 DispatchQueue.main.async { [weak self] in
                     self?.setLabel(from: data.data)
+                    // KingFisher to download from the gif url
                     self?.gifView.kf.setImage(with: data.data.images.downsized_large.url, placeholder: nil)
                 }
             }
